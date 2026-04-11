@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Bloom & Fern | Simple Nature Studio</title>
+    <!-- Inline CSS only — no external files -->
+    <style>
+        /* ----- reset & base styles (inline within <style> block, but fully internal) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #f8faf4 0%, #eef3e6 100%);
+            color: #1e2a1c;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        /* main container */
+        .site-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 245, 0.92);
+            border-radius: 3rem;
+            box-shadow: 0 20px 35px -12px rgba(40, 30, 10, 0.2);
+            backdrop-filter: blur(0px);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* header section */
+        .header {
+            background: #2c4b2f;
+            padding: 2rem 2rem 1.8rem;
+            text-align: center;
+            color: #fef9e6;
+            border-bottom: 4px solid #e9c46a;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            letter-spacing: -0.5px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            word-break: keep-all;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* navigation bar — inline style example */
+        .nav-bar {
+            background: #fefae0;
+            padding: 0.85rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            border-bottom: 1px solid #d4d9bf;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2c4b2f;
+            padding: 0.4rem 0.2rem;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-bar a:hover {
+            border-bottom-color: #e9c46a;
+            color: #bc6c25;
+            transform: translateY(-2px);
+        }
+
+        /* main content grid */
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 2rem 2rem 2rem;
+        }
+
+        .main-card {
+            flex: 2;
+            min-width: 220px;
+        }
+
+        .sidebar {
+            flex: 1.2;
+            min-width: 200px;
+        }
+
+        /* card style */
+        .card {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.5rem 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e2e8cf;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 28px -10px rgba(60, 40, 20, 0.15);
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            color: #2c4b2f;
+            border-left: 5px solid #e9c46a;
+            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin: 1rem 0 0.5rem 0;
+            color: #5a6e3f;
+        }
+
+        .highlight-text {
+            background: #fbf8e3;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1.5rem;
+            margin: 1rem 0;
+            border-left: 6px solid #e9c46a;
+            font-weight: 500;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #e9c46a;
+            color: #2c3e1f;
+            padding: 0.65rem 1.4rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background 0.2s, transform 0.1s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: #d4a373;
+            color: white;
+            transform: scale(0.98);
+        }
+
+        /* project list styling */
+        .project-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .project-list li {
+            background: #f9f7ef;
+            margin: 0.7rem 0;
+            padding: 0.6rem 1rem;
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+        }
+
+        .project-list li::before {
+            content: "🌿";
+            font-size: 1.2rem;
+        }
+
+        /* footer */
+        .footer {
+            background: #e9eddd;
+            text-align: center;
+            padding: 1.8rem;
+            font-size: 0.85rem;
+            color: #3b4b2e;
+            border-top: 1px solid #ccd5ae;
+        }
+
+        /* responsive touches */
+        @media (max-width: 700px) {
+            body {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .content-grid {
+                padding: 1.5rem;
+                gap: 1rem;
+            }
+            .nav-bar {
+                gap: 1.2rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+        }
+
+        /* inline-style demo element — additional micro interaction */
+        .badge {
+            background: #2c4b2f20;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2c4b2f;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+<div class="site-wrapper">
+    <!-- header -->
+    <div class="header">
+        <h1>🌱 Bloom & Fern</h1>
+        <p>simple stories from a green studio • creativity rooted in nature</p>
+    </div>
+
+    <!-- navigation -->
+    <div class="nav-bar">
+        <a href="#">home</a>
+        <a href="#">journal</a>
+        <a href="#">gallery</a>
+        <a href="#">connect</a>
+    </div>
+
+    <!-- main grid area: articles + sidebar -->
+    <div class="content-grid">
+        <!-- left / main column -->
+        <div class="main-card">
+            <div class="card">
+                <h2>✨ welcome, fellow nature lover</h2>
+                <p>We believe that simple, mindful moments with plants and art bring joy. This website is a tiny corner 
+                of the internet built with pure HTML and <strong>inline CSS</strong> — no frameworks, no complexity. 
+                Just clean design and good vibes.</p>
+                <div class="highlight-text">
+                    🌼 “The earth laughs in flowers.” — Ralph Waldo Emerson
+                </div>
+                <p>Whether you are here to explore our plant projects or just breathe a little, you're welcome. 
+                Scroll down to see what we’ve been growing lately.</p>
+                <a href="#" class="btn">📖 read our latest notes →</a>
+            </div>
+
+            <div class="card">
+                <h2>🌻 recent projects</h2>
+                <ul class="project-list">
+                    <li>Herb spiral garden — urban balcony edition</li>
+                    <li>Botanical ink illustrations & postcards</li>
+                    <li>DIY fern propagation workshop (online)</li>
+                    <li>Compost tea recipe for houseplants</li>
+                </ul>
+                <p style="margin-top: 12px; font-size: 0.95rem; color: #4c6141;">⭐ Each project includes free guides — just drop a message through our contact page.</p>
+            </div>
+
+            <!-- extra card: "inline style demo" section inside same flow -->
+            <div class="card" style="background: #fefaf0; border: 1px solid #eedd99;">
+                <h2>🍃 why inline css?</h2>
+                <p>This page uses <strong style="background: #e9c46a30; padding: 0.2rem 0.4rem; border-radius: 12px;">embedded &lt;style&gt; block</strong> — but also demonstrates that inline styles can be used for specific touches. For example, this card has a unique background and border <span style="font-family: monospace; background: #eee7d5; padding: 0.1rem 0.4rem;">(inline background)</span>. 
+                It's simple, fast, and keeps everything in one file. Great for demos, prototypes, or small websites.</p>
+                <div style="display: flex; gap: 0.8rem; margin-top: 1rem; flex-wrap: wrap;">
+                    <span style="background: #d4e0c0; border-radius: 30px; padding: 0.3rem 1rem; font-size: 0.8rem;">🌿 eco-friendly</span>
+                    <span style="background: #f1e0b5; border-radius: 30px; padding: 0.3rem 1rem; font-size: 0.8rem;">📦 one-file</span>
+                    <span style="background: #cfdab9; border-radius: 30px; padding: 0.3rem 1rem; font-size: 0.8rem;">⚡ light & fast</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- sidebar area -->
+        <div class="sidebar">
+            <div class="card">
+                <h2>📬 hello, friend</h2>
+                <p style="margin-bottom: 1rem;">I'm <strong>Wren</strong>, creator of Bloom & Fern. I love combining simple web craft with botanical inspiration. This sample website shows how clean inline CSS can build something cozy and responsive.</p>
+                <div style="background: #e2e8cf; border-radius: 28px; padding: 1rem; text-align: center;">
+                    🌟 <strong>plant tip of the day</strong><br>
+                    "Let your soil dry slightly between waterings — most indoor plants love consistency, not floods."
+                </div>
+                <a href="#" class="btn" style="margin-top: 1.5rem; display: inline-block;">📧 say hello</a>
+            </div>
+
+            <div class="card">
+                <h2>🌿 garden notes</h2>
+                <div style="margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px dashed #cbd5ad; padding: 0.6rem 0;">
+                        <span>🌱 propagation 101</span> 
+                        <span class="badge">new</span>
+                    </div>
+                    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px dashed #cbd5ad; padding: 0.6rem 0;">
+                        <span>🍂 fall leaf compost</span>
+                        <span class="badge">guide</span>
+                    </div>
+                    <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 0.6rem 0;">
+                        <span>🌸 spring ephemerals</span>
+                        <span class="badge">inspo</span>
+                    </div>
+                </div>
+                <p style="font-size: 0.85rem; margin-top: 8px;">✨ subscribe to get seasonal notes & free botanical wallpapers.</p>
+                <div style="margin-top: 1rem;">
+                    <input type="email" placeholder="your email" style="width: 100%; padding: 10px 12px; border-radius: 60px; border: 1px solid #ccd5ae; background: white; margin-bottom: 8px;" aria-label="email signup">
+                    <button class="btn" style="width: 100%; text-align: center;">subscribe 🌼</button>
+                </div>
+            </div>
+
+            <!-- inline style extra card: fun fact -->
+            <div class="card" style="background: #fff9ed;">
+                <h2>💡 random delight</h2>
+                <p id="randomFact" style="font-size: 0.95rem; margin-bottom: 0.8rem;">🌻 Sunflowers can follow the sun (heliotropism) during early growth stages.</p>
+                <button class="btn" id="newFactBtn" style="background: #cfd5b5; color: #2d3e23;">new fact →</button>
+            </div>
+
+            <!-- simple micro interaction inline js for dynamic fact (keeps interactivity but still simple inline) -->
+            <script>
+                // small interactive script to change the fact - demonstrates dynamic inline behavior
+                const factContainer = document.getElementById('randomFact');
+                const factBtn = document.getElementById('newFactBtn');
+                if(factBtn && factContainer) {
+                    const factsList = [
+                        "🌻 Sunflowers can follow the sun (heliotropism) during early growth stages.",
+                        "🍃 Ferns are over 360 million years old — older than dinosaurs!",
+                        "🌵 Cacti store water in their stems, some can live for 200 years.",
+                        "🍄 The largest living organism on Earth is a honey fungus mushroom in Oregon.",
+                        "🌸 Bamboo can grow up to 35 inches in a single day.",
+                        "🌿 Snake plants release oxygen at night — perfect for bedrooms.",
+                        "🍎 Apples, roses, and almonds are all in the Rosaceae family."
+                    ];
+                    let factIndex = 0;
+                    factBtn.addEventListener('click', function() {
+                        factIndex = (factIndex + 1) % factsList.length;
+                        factContainer.textContent = factsList[factIndex];
+                        // tiny inline animation effect (optional)
+                        factContainer.style.transition = "0.1s";
+                        factContainer.style.opacity = "0.7";
+                        setTimeout(() => { factContainer.style.opacity = "1"; }, 100);
+                    });
+                }
+            </script>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer">
+        <p>🌼 Bloom & Fern — simple sample website crafted with HTML & inline CSS 🌼</p>
+        <p style="margin-top: 0.5rem; font-size: 0.75rem;">© 2025 inspired by nature • handmade with love • no external dependencies</p>
+    </div>
+</div>
+
+<!-- tiny extra inline style to show additional micro-interaction (already embedded, but all inside) -->
+</body>
+</html>

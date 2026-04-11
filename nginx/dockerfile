@@ -1,0 +1,6 @@
+FROM nginx
+RUN apt-get update
+RUN apt-get install vim -y
+RUN apt-get install nano -y
+
+COPY src/index.html /usr/share/nginx/html/
