@@ -86,29 +86,9 @@ docker rmi web_app_image:latest
 
 ---
 
-## 📁 Project Structure (Example)
-
-nginx-project/
-│── Dockerfile
-│── index.html
-│── nginx.conf (optional)
-
----
 
 ## 📌 Notes
 
 * Ensure port `8080` is not already in use.
 * Modify the Dockerfile or Nginx configuration as needed.
 * You can change the exposed port by editing the `docker run` command.
-
----
-
-## 🧑‍💻 Author
-
-Your Name
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
