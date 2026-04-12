@@ -68,13 +68,9 @@ docker run -d -p 3000:3000 --name my-node-app node-api-app
 Open another terminal or use your browser:
 
 ```bash
-# Test the root endpoint
-curl http://localhost:3000/
-
 # Test the users endpoint
 curl http://localhost:3000/users
 ```
 
 Or open your browser and navigate to:
-- `http://localhost:3000/`
 - `http://localhost:3000/users`
