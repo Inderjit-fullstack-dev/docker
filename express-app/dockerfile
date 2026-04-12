@@ -1,0 +1,27 @@
+# Use Node.js version 22 as the base image
+FROM node:22
+
+# Set the working directory inside the container to /app
+# All subsequent commands will run from this directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json (if they exist) from host to container
+# The dot (.) at the end means copy to the current WORKDIR (/app)
+COPY package*.json .
+
+# Install Node.js dependencies defined in package.json
+# The RUN command executes during image build
+RUN npm i
+
+# Copy the source file from src/index.js on the host to index.js in the container
+# Note: This assumes index.js is the entry point of your application
+COPY src/index.js index.js
+
+# Document that the container will listen on port 3000
+# This is for documentation purposes - it doesn't actually publish the port
+EXPOSE 3000
+
+# Define the command to run when the container starts
+# This will execute: node index.js
+# CMD can be overridden at runtime, unlike RUN which is build-time only
+CMD [ "node", "index.js" ]
