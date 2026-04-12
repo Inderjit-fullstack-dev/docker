@@ -8,18 +8,6 @@ A simple Node.js Express application that provides a REST API endpoint to return
 - Docker installed on your system
 - Node.js (only for local development, optional)
 
-## Project Structure
-
-```
-project/
-├── Dockerfile
-├── package.json
-├── package-lock.json
-├── src/
-│   └── index.js
-└── README.md
-```
-
 ## API Endpoints
 
 | Method | Endpoint | Description |
