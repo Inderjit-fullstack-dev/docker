@@ -1,9 +1,9 @@
 const express = require('express'); 
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
  
-app.get('/users', (request, response) => {
+app.get('/users', (req, res) => {
     const users = [
         {
             id: 1,
@@ -42,7 +42,7 @@ app.get('/users', (request, response) => {
         }
     ];
     
-    response.json(users);
+    res.json(users);
 });
 
 app.listen(port, () => {

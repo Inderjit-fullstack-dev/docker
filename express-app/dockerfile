@@ -15,13 +15,15 @@ RUN npm i
 
 # Copy the source file from src/index.js on the host to index.js in the container
 # Note: This assumes index.js is the entry point of your application
-COPY src/index.js index.js
+COPY . .
 
-# Document that the container will listen on port 3000
-# This is for documentation purposes - it doesn't actually publish the port
-EXPOSE 3000
+
+# Set environment variables directly in Dockerfile
+ENV PORT=8080
+
+EXPOSE 8080
 
 # Define the command to run when the container starts
 # This will execute: node index.js
 # CMD can be overridden at runtime, unlike RUN which is build-time only
-CMD [ "node", "index.js" ]
+CMD [ "node", "src/index.js" ]
