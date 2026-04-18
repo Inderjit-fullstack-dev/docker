@@ -1,0 +1,58 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build artifacts
+bin/
+obj/
+
+# Rider
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+.history/
+
+# EF Core Migrations (optional)
+# DockerisedTodoApp/Data/Migrations/
+
+# Local DB
+*.mdf
+*.ldf
+
+# ASP.NET Core
+appsettings.Development.json
+secrets.json
+
+# dotnet tools
+.dotnet_tool_restore
+.dotnet_tools.json
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+
+# npm
+node_modules/
+
+# Docker
+docker-compose.override.yml
+
+# Ignore published output
+publish/
+
+# JetBrains Rider local history
+.idea/

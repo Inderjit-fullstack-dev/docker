@@ -3,3 +3,5 @@ readme.md
 node_modules
 
 **/*.test.js
+
+**/*env*
