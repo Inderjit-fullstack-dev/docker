@@ -10,8 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Configure EF Core DbContext with SQL Server
+var defaultConn = builder.Configuration.GetConnectionString("DefaultConnection");
+// Allow overriding connection string via environment when running in containers (uses Docker compose env vars)
+var connFromEnv = builder.Configuration["ConnectionStrings:DefaultConnection"];
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(!string.IsNullOrWhiteSpace(connFromEnv) ? connFromEnv : defaultConn));
 
 // Register TodoService
 builder.Services.AddScoped<DockerisedTodoApp.Services.ITodoService, DockerisedTodoApp.Services.TodoService>();
