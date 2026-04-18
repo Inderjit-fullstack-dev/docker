@@ -16,6 +16,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Register TodoService
 builder.Services.AddScoped<DockerisedTodoApp.Services.ITodoService, DockerisedTodoApp.Services.TodoService>();
 
+// Configure Redis distributed cache (assumes redis running on localhost:6379)
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetValue<string>("Redis:Configuration");
+});
+
 
 builder.Services.AddOpenApi();
 
