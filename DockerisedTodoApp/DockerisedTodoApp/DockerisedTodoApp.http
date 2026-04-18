@@ -1,0 +1,6 @@
+@DockerisedTodoApp_HostAddress = http://localhost:5075
+
+GET {{DockerisedTodoApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
