@@ -4,13 +4,18 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# copy csproj(s) and restore as distinct layers
-COPY DockerisedTodoApp.csproj ./
-RUN dotnet restore "DockerisedTodoApp.csproj"
+# Copy only the project file first (project is in DockerisedTodoApp/)
+COPY DockerisedTodoApp/DockerisedTodoApp.csproj DockerisedTodoApp/
 
-# copy the rest and publish
-COPY . ./
-RUN dotnet publish "DockerisedTodoApp.csproj" -c Release -o /app/publish /p:UseAppHost=false
+# Restore as distinct layer
+RUN dotnet restore DockerisedTodoApp/DockerisedTodoApp.csproj
+
+# Copy the entire repository
+COPY . .
+
+# Set working dir to project and publish
+WORKDIR /src/DockerisedTodoApp
+RUN dotnet publish DockerisedTodoApp.csproj -c Release -o /app/publish /p:UseAppHost=false
 
 # runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime

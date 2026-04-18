@@ -11,6 +11,8 @@ services:
       - "1433:1433"
     volumes:
       - sqlserverdata:/var/opt/mssql
+    networks:
+      - todo-network
 
   redis:
     image: redis:7-alpine
@@ -18,6 +20,8 @@ services:
     ports:
       - "6379:6379"
     command: ["redis-server", "--requirepass", "StrongRedisPass123!"]
+    networks:
+      - todo-network
 
   todoapp:
     build:
@@ -25,15 +29,14 @@ services:
       dockerfile: Dockerfile
     image: dockerisedtodoapp:latest
     container_name: dockerised_todo_app
+    restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=DockerisedTodoDb;User Id=sa;Password=Strong!Passw0rd;TrustServerCertificate=True;
       - Redis__Configuration=redis:6379,password=StrongRedisPass123!
     depends_on:
-      sqlserver:
-        condition: service_healthy
-      redis:
-        condition: service_started
+      - sqlserver
+      - redis
     ports:
       - "5000:80"
     networks:
